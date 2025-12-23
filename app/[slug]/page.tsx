@@ -49,10 +49,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
             </header>
 
-            <div
-                className="prose prose-lg max-w-none prose-slate prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-500"
-                dangerouslySetInnerHTML={{ __html: post.content || "" }}
-            />
+            import ReactMarkdown from "react-markdown";
+
+            // ...
+
+            <div className="prose prose-lg max-w-none prose-slate prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-500">
+                <ReactMarkdown>{post.content || ""}</ReactMarkdown>
+            </div>
 
             <div className="mt-16 pt-8 border-t border-gray-100">
                 <Link href="/" className="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors">
