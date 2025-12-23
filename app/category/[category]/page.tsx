@@ -11,7 +11,7 @@ export async function generateStaticParams() {
     const categories = Array.from(new Set(posts.map((p) => p.category)));
     console.log(`📝 Generating static params for ${categories.length} categories:`, categories);
     return categories.map((category) => ({
-        category: encodeURIComponent(category),
+        category: category,
     }));
 }
 
