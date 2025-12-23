@@ -3,6 +3,7 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     output: 'export',
+    basePath: '/investment-puzzles',
     images: {
         unoptimized: true,
     }
