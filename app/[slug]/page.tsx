@@ -2,6 +2,7 @@ import { getPostBySlug, getPosts } from "@/lib/notion-service";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from 'next';
+import ReactMarkdown from "react-markdown";
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -48,10 +49,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                     {post.date} • {post.category}
                 </div>
             </header>
-
-            import ReactMarkdown from "react-markdown";
-
-            // ...
 
             <div className="prose prose-lg max-w-none prose-slate prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-500">
                 <ReactMarkdown>{post.content || ""}</ReactMarkdown>
