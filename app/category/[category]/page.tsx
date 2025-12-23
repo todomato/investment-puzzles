@@ -6,6 +6,14 @@ interface PageProps {
     params: Promise<{ category: string }>;
 }
 
+export async function generateStaticParams() {
+    const posts = await getPosts();
+    const categories = Array.from(new Set(posts.map((p) => p.category)));
+    return categories.map((category) => ({
+        category: category,
+    }));
+}
+
 export default async function CategoryPage({ params }: PageProps) {
     // Decode category from URL (e.g. "Tech" or "Investment")
     const { category: rawCategory } = await params;

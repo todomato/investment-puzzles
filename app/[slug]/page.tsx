@@ -1,10 +1,17 @@
-import { getPostBySlug } from "@/lib/mock-service";
+import { getPostBySlug, getPosts } from "@/lib/mock-service";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from 'next';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+    const posts = await getPosts();
+    return posts.map((post) => ({
+        slug: post.slug,
+    }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
