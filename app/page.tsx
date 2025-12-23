@@ -1,4 +1,4 @@
-import { getPosts } from "@/lib/mock-service";
+import { getPosts } from "@/lib/notion-service";
 import { PostCard } from "@/components/blog/PostCard";
 
 export default async function Home() {

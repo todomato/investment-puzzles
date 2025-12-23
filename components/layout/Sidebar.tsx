@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getPosts } from "@/lib/mock-service";
+import { getPosts } from "@/lib/notion-service";
 
 export async function Sidebar() {
     const posts = await getPosts();

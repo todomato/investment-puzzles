@@ -1,4 +1,4 @@
-import { getPostBySlug, getPosts } from "@/lib/mock-service";
+import { getPostBySlug, getPosts } from "@/lib/notion-service";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from 'next';
