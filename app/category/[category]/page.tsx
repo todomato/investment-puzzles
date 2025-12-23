@@ -9,8 +9,9 @@ interface PageProps {
 export async function generateStaticParams() {
     const posts = await getPosts();
     const categories = Array.from(new Set(posts.map((p) => p.category)));
+    console.log(`📝 Generating static params for ${categories.length} categories:`, categories);
     return categories.map((category) => ({
-        category: category,
+        category: encodeURIComponent(category),
     }));
 }
 

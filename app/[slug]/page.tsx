@@ -9,7 +9,9 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
+    console.log("DEBUG: Running generateStaticParams for [slug]");
     const posts = await getPosts();
+    console.log(`📝 Generating static params for ${posts.length} posts`);
     return posts.map((post) => ({
         slug: post.slug,
     }));

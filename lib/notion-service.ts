@@ -5,7 +5,16 @@ import type { BlogPost } from "./types";
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 export async function getPosts(): Promise<BlogPost[]> {
+    if (!DATABASE_ID) {
+        console.error("❌ getPosts: Missing DATABASE_ID");
+        return [];
+    }
+
     try {
+        console.log(`🔍 Fetching posts from DB ${DATABASE_ID}...`);
+
+        // Use standard client method
+        // Use standard client method
         const response = await notion.request({
             path: `databases/${DATABASE_ID}/query`,
             method: "post",
@@ -25,9 +34,10 @@ export async function getPosts(): Promise<BlogPost[]> {
             },
         }) as any;
 
+        console.log(`✅ Fetched ${response.results.length} posts.`);
+
         const posts = response.results.map((page: any) => {
             const props = page.properties;
-
             return {
                 id: page.id,
                 slug: props.Slug?.rich_text[0]?.plain_text || page.id,
@@ -36,7 +46,6 @@ export async function getPosts(): Promise<BlogPost[]> {
                 tags: props.Tags?.multi_select?.map((t: any) => t.name) || [],
                 category: props.Category?.select?.name || "Uncategorized",
                 summary: props.Summary?.rich_text[0]?.plain_text || "",
-                // We don't fetch full content in list view for performance
                 content: "",
                 published: props.Published?.checkbox || false,
             };
@@ -44,12 +53,14 @@ export async function getPosts(): Promise<BlogPost[]> {
 
         return posts;
     } catch (error) {
-        console.error("Error fetching posts from Notion:", error);
+        console.error("❌ Error fetching posts from Notion:", error);
         return [];
     }
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | undefined> {
+    if (!DATABASE_ID) return undefined;
+
     try {
         const response = await notion.request({
             path: `databases/${DATABASE_ID}/query`,
@@ -83,7 +94,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | undefined>
         const mdblocks = await n2m.pageToMarkdown(page.id);
         const mdString = n2m.toMarkdownString(mdblocks);
 
-        // Check if mdString.parent is string or object (wrapper update compatibility)
+        // ... (rest of logic same)
         const content = typeof mdString.parent === 'string' ? mdString.parent : mdString.parent || "";
 
         const props = page.properties;
