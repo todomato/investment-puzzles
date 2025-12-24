@@ -66,3 +66,44 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 *   `NOTION_DATABASE_ID`
 
 ---
+
+## 🧪 Testing (E2E)
+
+我們使用 **Playwright** 進行端對端測試，確保網站核心功能 (導航、搜尋、資料載入) 正常運作。
+
+### 執行測試步驟
+
+1.  **啟動測試環境** (需先開啟 Local Server，若無則 Playwright 會嘗試開啟)：
+    ```bash
+    npm run dev
+    ```
+2.  **執行測試指令**：
+    ```bash
+    npm run test
+    ```
+    *(此指令等同於 `playwright test`，但透過 npm script 執行可繞過部分 PowerShell 權限問題)*
+
+### 常見問題排除
+
+#### Q: PowerShell 出現 "UnauthorizedAccess" 或 "未經數位簽署" 錯誤？
+這是 Windows 預設的安全策略阻擋了 `npx` 或 `npm` 的腳本執行。
+
+**解決方法 1 (推薦)**：
+使用我們設定好的 npm script：
+```bash
+npm run test
+```
+
+**解決方法 2 (暫時放寬權限)**：
+在當前 PowerShell 視窗執行以下指令，暫時允許執行腳本：
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+之後再執行原指令即可。
+
+**解決方法 3 (使用 cmd Wrapper)**：
+```bash
+cmd /c "npx playwright test"
+```
+
+---
