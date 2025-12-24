@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-TW" suppressHydrationWarning>
-      <body className="antialiased min-h-screen flex flex-col bg-white text-gray-900 font-sans">
+      <body className="antialiased min-h-screen flex flex-col bg-white text-gray-900 font-sans" suppressHydrationWarning>
         <Navbar />
         <div className="flex-grow w-full max-w-6xl mx-auto px-4 py-8">
           <div className="flex flex-col lg:flex-row gap-12">

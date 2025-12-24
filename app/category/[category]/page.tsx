@@ -10,9 +10,17 @@ export async function generateStaticParams() {
     const posts = await getPosts();
     const categories = Array.from(new Set(posts.map((p) => p.category)));
     console.log(`📝 Generating static params for ${categories.length} categories:`, categories);
-    return categories.map((category) => ({
-        category: category,
-    }));
+
+    // Return both raw and encoded versions to satisfy Next.js strict validation
+    const params = [];
+    for (const category of categories) {
+        params.push({ category: category });
+        const encoded = encodeURIComponent(category);
+        if (encoded !== category) {
+            params.push({ category: encoded });
+        }
+    }
+    return params;
 }
 
 export default async function CategoryPage({ params }: PageProps) {
