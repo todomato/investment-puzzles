@@ -53,7 +53,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </header>
 
             <div className="prose prose-lg max-w-none prose-slate prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-500">
-                <ReactMarkdown>{post.content || ""}</ReactMarkdown>
+                <ReactMarkdown components={{ h1: 'h2' }}>{post.content || ""}</ReactMarkdown>
             </div>
 
             <div className="mt-16 pt-8 border-t border-gray-100">

@@ -38,6 +38,10 @@
 - [x] 新增 AI Agent Notion API 使用指引。
 - [x] 建立此 Work Log。
 
+#### 4. Maintenance
+- [x] 關閉被佔用的 Port 3000 (PID: 14632)。
+- [x] 修復 Blog Post 頁面重複 H1 標籤導致的測試錯誤 (降級 Markdown H1 為 H2)。
+
 ### 📝 Notes
 - **E2E 測試注意事項**：測試前確保 Local Server (`npm run dev`) 已啟動。若遇到 Port 佔用問題，可使用 `taskkill /F /IM node.exe` 清理。
 - **Notion API**：未來開發需注意不要在個別檔案 new Client，應統一使用 `lib/notion.ts`。
