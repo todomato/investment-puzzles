@@ -11,7 +11,7 @@ async function checkUpdates() {
             process.exit(1);
         }
 
-        const timeWindow = 60 * 60 * 1000;
+        const timeWindow = 25 * 60 * 60 * 1000; // 25 hours to cover the daily schedule + buffer
         const threshold = new Date(Date.now() - timeWindow);
 
         console.log(`Checking for updates since: ${threshold.toISOString()}`);
